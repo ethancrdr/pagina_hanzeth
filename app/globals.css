@@ -28,8 +28,8 @@
   a { color: inherit; }
   img { max-width: 100%; display: block; }
   ::selection {
-    background: rgba(201, 168, 106, 0.25);
-    color: #F2F1ED;
+    background: rgba(74, 110, 247, 0.25);
+    color: #EDF0F5;
   }
 }
 
@@ -71,7 +71,7 @@
   .skip:focus { top: 0; }
 
   :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-    outline: 2px solid #C9A86A;
+    outline: 2px solid #4A6EF7;
     outline-offset: 2px;
     border-radius: 4px;
   }

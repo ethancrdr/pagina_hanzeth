@@ -9,26 +9,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: '#0B0D10',
-        surface: '#13161B',
-        surfaceHigh: '#181B20',
+        bg: '#0A0C12',
+        surface: '#13161F',
+        surfaceHigh: '#181C26',
         border: 'rgba(255, 255, 255, 0.06)',
         'border-strong': 'rgba(255, 255, 255, 0.12)',
 
-        text: '#F2F1ED',
-        'text-muted': '#6B6B68',
+        text: '#EDF0F5',
+        'text-muted': '#8A93A6',
         'text-subtle': '#45454A',
 
         accent: {
-          DEFAULT: '#C9A86A',
-          soft: '#7A6543',
+          DEFAULT: '#4A6EF7',
+          soft: '#8FA8FF',
         },
 
-        pastel: {
-          red: { bg: '#2A1A1A', text: '#E8B4B0' },
-          blue: { bg: '#14212B', text: '#9CC2D9' },
-          green: { bg: '#18241B', text: '#B0CDB0' },
-          yellow: { bg: '#2A2418', text: '#D9C089' },
+        tag: {
+          bg: 'rgba(74, 110, 247, 0.10)',
+          text: '#8FA8FF',
         },
       },
       borderRadius: {
