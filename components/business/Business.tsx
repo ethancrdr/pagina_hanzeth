@@ -50,8 +50,7 @@ export function Business() {
     >
       <div className="wrap">
         <div className="max-w-[680px] reveal">
-          <span className="eyebrow">Modelo SEN</span>
-          <h2 id="business-title" className="font-display text-h2 mt-3 text-text">
+          <h2 id="business-title" className="font-display text-h2 text-text">
             Un sistema, no una idea.
           </h2>
           <p className="mt-4 max-w-[60ch] text-text-muted text-body">
@@ -93,7 +92,9 @@ export function Business() {
           </div>
 
           <div className="reveal">
-            <span className="eyebrow">Preguntas frecuentes</span>
+            <h3 className="font-display text-h3 text-text">
+              Preguntas frecuentes
+            </h3>
             <div className="mt-5 divide-y divide-border">
               {faq.map((item, i) => (
                 <details

@@ -17,7 +17,7 @@ const config: Config = {
 
         text: '#EDF0F5',
         'text-muted': '#8A93A6',
-        'text-subtle': '#45454A',
+        'text-subtle': '#6B6E76',
 
         accent: {
           DEFAULT: '#4A6EF7',

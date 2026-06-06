@@ -15,6 +15,8 @@ import { trackEvent } from '@/lib/analytics/events';
 
 type Step = 1 | 2 | 3 | 4 | 'result';
 
+const STORAGE_KEY = 'hc_quiz_state_v1';
+
 const initialAnswers: Answers = {
   priority: null,
   time: null,
@@ -38,8 +40,7 @@ function QuizSkeleton() {
     <section id="quiz" className="bg-bg py-20 md:py-32" aria-labelledby="quiz-title">
       <div className="wrap">
         <div className="max-w-[640px] mx-auto">
-          <div className="font-mono text-mono text-text-muted">01 / 04</div>
-          <h2 id="quiz-title" className="font-display text-h2 mt-3 text-text">
+          <h2 id="quiz-title" className="font-display text-h2 text-text">
             Descubre tu camino en 60 segundos.
           </h2>
           <div className="mt-12 min-h-[320px]" />
@@ -67,6 +68,35 @@ function QuizInner() {
         : { ...a, priority: intent === 'health' ? 'health' : 'income' },
     );
   }, [intent]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as { answers: Answers; current: Step };
+      if (parsed.answers && typeof parsed.answers === 'object') {
+        setAnswers((a) => ({ ...a, ...parsed.answers }));
+      }
+      if (typeof parsed.current === 'number' && parsed.current >= 1 && parsed.current <= 4) {
+        setCurrent(parsed.current);
+      }
+    } catch {
+      // ignore corrupted state
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      sessionStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ answers, current }),
+      );
+    } catch {
+      // ignore quota errors
+    }
+  }, [answers, current]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -185,6 +215,11 @@ function QuizInner() {
         profile: routeQuiz(answers),
         country: countryFromCC(answers.cc),
       });
+      try {
+        sessionStorage.removeItem(STORAGE_KEY);
+      } catch {
+        // ignore
+      }
       setCurrent('result');
     } catch {
       setSubmitError('No se pudo enviar. Intenta de nuevo o escríbenos directo a WhatsApp.');
@@ -386,6 +421,7 @@ function Step4({
           type="text"
           placeholder="Tu nombre"
           autoComplete="given-name"
+          maxLength={80}
           value={answers.name}
           onChange={(v) => onChange('name', v)}
           error={errors.name}
@@ -398,6 +434,7 @@ function Step4({
           placeholder="tucorreo@ejemplo.com"
           autoComplete="email"
           inputMode="email"
+          maxLength={120}
           value={answers.email}
           onChange={(v) => onChange('email', v)}
           error={errors.email}
@@ -427,6 +464,8 @@ function Step4({
               autoComplete="tel-national"
               inputMode="numeric"
               placeholder="Número de WhatsApp"
+              maxLength={20}
+              pattern="[0-9 ]+"
               value={answers.phone}
               onChange={(e) => onChange('phone', e.target.value)}
               className="font-sans text-body min-h-[56px] px-4 rounded-md border border-border bg-transparent text-text flex-1 min-w-0 transition-colors duration-150 focus:border-accent placeholder:text-text-subtle"
@@ -468,6 +507,7 @@ function Field({
   placeholder,
   autoComplete,
   inputMode,
+  maxLength,
   value,
   onChange,
   error,
@@ -479,6 +519,7 @@ function Field({
   placeholder?: string;
   autoComplete?: string;
   inputMode?: 'text' | 'email' | 'tel' | 'numeric' | 'search' | 'url';
+  maxLength?: number;
   value: string;
   onChange: (v: string) => void;
   error?: string;
@@ -495,6 +536,7 @@ function Field({
         placeholder={placeholder}
         autoComplete={autoComplete}
         inputMode={inputMode}
+        maxLength={maxLength}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="w-full font-sans text-body min-h-[56px] px-4 rounded-md border border-border bg-transparent text-text transition-colors duration-150 focus:border-accent placeholder:text-text-subtle"
