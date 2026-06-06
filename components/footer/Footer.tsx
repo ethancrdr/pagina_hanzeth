@@ -1,83 +1,61 @@
+import { buildWhatsAppUrl } from '@/lib/geo';
+
+const WA_MESSAGE = 'Hola Hanzeth, vengo de tu web.';
+
 export function Footer() {
   return (
-    <footer className="bg-band text-text-onBand py-12 md:py-12">
-      <div className="wrap">
-        <div className="flex flex-col gap-5 items-center text-center md:flex-row md:justify-between md:text-left">
-          <p className="text-[0.85rem] text-text-mutedOnBand">
-            © 2026 Hanzeth Cordero. Todos los derechos reservados.
-          </p>
-          <nav
-            className="flex gap-5 flex-wrap justify-center"
-            aria-label="Enlaces legales"
-          >
-            <a href="#" className="text-text-mutedOnBand no-underline text-[0.9rem] hover:text-text-onBand">
-              Política de privacidad
-            </a>
-            <a href="#" className="text-text-mutedOnBand no-underline text-[0.9rem] hover:text-text-onBand">
-              Términos
-            </a>
-          </nav>
-          <div className="flex gap-3">
+    <footer className="bg-surface border-t border-border">
+      <div className="wrap py-12 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+          <div>
+            <p className="font-display italic text-h3 text-text">
+              Hanzeth Cordero
+            </p>
+            <p className="mt-2 text-small text-text-muted max-w-[28ch]">
+              Distribuidor independiente 4Life · Sistema SEN.
+            </p>
+          </div>
+
+          <div>
+            <p className="font-mono text-mono uppercase text-text-muted mb-4">
+              Contacto
+            </p>
             <a
-              href="#"
-              aria-label="Instagram"
-              className="w-[42px] h-[42px] rounded-full border border-border-onBand flex items-center justify-center text-text-mutedOnBand transition-all duration-150 hover:text-text-onBand hover:border-text-onBand hover:bg-white/[0.06]"
+              href={buildWhatsAppUrl(WA_MESSAGE)}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex items-center gap-2 text-text hover:text-accent transition-colors text-small"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-[19px] h-[19px]"
-              >
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
               </svg>
-            </a>
-            <a
-              href="#"
-              aria-label="Facebook"
-              className="w-[42px] h-[42px] rounded-full border border-border-onBand flex items-center justify-center text-text-mutedOnBand transition-all duration-150 hover:text-text-onBand hover:border-text-onBand hover:bg-white/[0.06]"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-[19px] h-[19px]"
-              >
-                <path d="M14 9V7a2 2 0 0 1 2-2h2V2h-3a4 4 0 0 0-4 4v3H8v3h3v9h3v-9h3l1-3h-4Z" />
-              </svg>
-            </a>
-            <a
-              href="#"
-              aria-label="YouTube"
-              className="w-[42px] h-[42px] rounded-full border border-border-onBand flex items-center justify-center text-text-mutedOnBand transition-all duration-150 hover:text-text-onBand hover:border-text-onBand hover:bg-white/[0.06]"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-[19px] h-[19px]"
-              >
-                <rect x="2" y="5" width="20" height="14" rx="4" />
-                <path d="m10 9 5 3-5 3V9Z" fill="currentColor" stroke="none" />
-              </svg>
+              WhatsApp directo
             </a>
           </div>
+
+          <div>
+            <p className="font-mono text-mono uppercase text-text-muted mb-4">
+              Legal
+            </p>
+            <nav className="flex flex-col gap-2" aria-label="Enlaces legales">
+              <a href="#" className="text-small text-text-muted hover:text-text transition-colors w-fit">
+                Política de privacidad
+              </a>
+              <a href="#" className="text-small text-text-muted hover:text-text transition-colors w-fit">
+                Términos
+              </a>
+            </nav>
+          </div>
         </div>
-        <p className="mt-6 pt-5 border-t border-border-onBand text-[0.72rem] leading-relaxed text-[rgba(157,176,196,0.7)] max-w-[760px] mx-auto text-center">
-          Los resultados pueden variar. Los testimonios no representan garantías. Este sitio no es
-          parte de Facebook, Google, Meta o 4Life Research.
-        </p>
+
+        <div className="mt-10 pt-6 border-t border-border">
+          <p className="font-mono text-mono text-text-subtle">
+            © 2026 Hanzeth Cordero · Todos los derechos reservados
+          </p>
+          <p className="mt-3 text-small text-text-muted max-w-[65ch]">
+            Los resultados pueden variar. Los testimonios no representan garantías. Este sitio no es parte de Facebook, Google, Meta o 4Life Research.
+          </p>
+        </div>
       </div>
     </footer>
   );

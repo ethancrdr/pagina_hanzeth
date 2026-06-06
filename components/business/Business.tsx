@@ -1,181 +1,134 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-
-type PillarData = {
-  id: string;
+type Pillar = {
+  number: string;
   label: string;
-  icon: 'chart' | 'globe' | 'edu';
   body: string;
 };
 
-const pillars: PillarData[] = [
+const pillars: Pillar[] = [
   {
-    id: 'pp1',
+    number: '01',
     label: 'Ingresos residuales',
-    icon: 'chart',
     body: 'Un modelo de apalancamiento financiero donde tu esfuerzo de hoy sigue generando frutos a futuro.',
   },
   {
-    id: 'pp2',
+    number: '02',
     label: 'Expansión internacional',
-    icon: 'globe',
     body: 'Un negocio global que opera en más de 100 países, con la flexibilidad de construir tu red desde donde estés.',
   },
   {
-    id: 'pp3',
-    label: 'Sistema educativo (SEN)',
-    icon: 'edu',
+    number: '03',
+    label: 'Sistema educativo SEN',
     body: 'Capacitación continua con la Guía del Éxito, audios, rallies y mentoría de líderes como el Dr. Herminio Nevárez. Un sistema de duplicación probado por más de 20 años.',
   },
 ];
 
-function PillarIcon({ name }: { name: PillarData['icon'] }) {
-  const common = {
-    viewBox: '0 0 24 24',
-    fill: 'none',
-    strokeWidth: 2,
-    strokeLinecap: 'round' as const,
-    strokeLinejoin: 'round' as const,
-    className: 'w-[22px] h-[22px] stroke-accent-soft',
-  };
-  if (name === 'chart') {
-    return (
-      <svg {...common}>
-        <path d="M3 3v18h18" />
-        <path d="m7 14 4-4 3 3 5-6" />
-      </svg>
-    );
-  }
-  if (name === 'globe') {
-    return (
-      <svg {...common}>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3C9.5 5.7 9.5 18.3 12 21" />
-      </svg>
-    );
-  }
-  return (
-    <svg {...common}>
-      <path d="M22 10 12 5 2 10l10 5 10-5Z" />
-      <path d="M6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5" />
-    </svg>
-  );
-}
-
-export function Pillar({ data }: { data: PillarData }) {
-  const [open, setOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const mql = window.matchMedia('(min-width: 768px)');
-    const onChange = (e: MediaQueryListEvent | MediaQueryList) =>
-      setIsDesktop('matches' in e ? e.matches : (e as MediaQueryList).matches);
-    onChange(mql);
-    mql.addEventListener('change', onChange as (e: Event) => void);
-    return () => mql.removeEventListener('change', onChange as (e: Event) => void);
-  }, []);
-
-  const expanded = isDesktop || open;
-
-  return (
-    <div
-      className="border border-border-onBand rounded-md overflow-hidden bg-white/[0.03]"
-      aria-expanded={expanded}
-    >
-      <h3>
-        <button
-          type="button"
-          className="w-full text-left bg-transparent border-0 cursor-pointer text-text-onBand flex items-center gap-4 p-5 font-display font-semibold text-[1.125rem]"
-          aria-expanded={expanded}
-          aria-controls={data.id}
-          onClick={() => !isDesktop && setOpen((v) => !v)}
-        >
-          <span className="flex-none w-11 h-11 rounded-md bg-accent/20 flex items-center justify-center">
-            <PillarIcon name={data.icon} />
-          </span>
-          <span className="flex-1">{data.label}</span>
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className={`flex-none w-[22px] h-[22px] text-text-mutedOnBand transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
-        </button>
-      </h3>
-      <div
-        id={data.id}
-        role="region"
-        className="overflow-hidden transition-[max-height] duration-300 ease-out"
-        style={{ maxHeight: expanded ? '240px' : '0px' }}
-      >
-        <p className="pl-[calc(1.25rem+44px+1rem)] pr-5 pb-5 text-text-mutedOnBand text-[1rem]">
-          {data.body}
-        </p>
-      </div>
-    </div>
-  );
-}
+const faq = [
+  {
+    q: '¿Cuánto capital necesito para empezar?',
+    a: 'No hay un capital mínimo obligatorio. La inversión inicial es la compra de tu primer pack de productos 4Life para uso personal, que también te acredita como distribuidor.',
+  },
+  {
+    q: '¿Necesito experiencia previa en ventas?',
+    a: 'No. SEN está diseñado para duplicarse. El sistema de capacitación te enseña paso a paso lo que necesitas saber.',
+  },
+  {
+    q: '¿Cuánto tiempo toma ver resultados?',
+    a: 'Depende de tu nivel de compromiso. Algunas personas ven sus primeras comisiones en el primer mes, otras construyen en seis. La constancia es la variable que más pesa.',
+  },
+  {
+    q: '¿Es un multinivel tradicional?',
+    a: '4Life es un network marketing con un sistema de compensación claro. SEN aporta la capa educativa y de comunidad. No es un esquema piramidal: hay producto real y consumo real.',
+  },
+];
 
 export function Business() {
   return (
     <section
       id="business"
-      className="bg-band text-text-onBand py-16 md:py-24"
+      className="bg-surface py-20 md:py-32"
       aria-labelledby="business-title"
     >
       <div className="wrap">
         <div className="max-w-[680px] reveal">
-          <p className="eyebrow">Oportunidad · SEN</p>
-          <h2
-            id="business-title"
-            className="mt-2.5 text-h2 md:text-[clamp(1.75rem,4.5vw,2.4rem)] text-balance"
-          >
-            Construye un negocio global con propósito
+          <span className="eyebrow">Modelo SEN</span>
+          <h2 id="business-title" className="font-display text-h2 mt-3 text-text">
+            Un sistema, no una idea.
           </h2>
-          <p className="mt-4 text-[1.05rem] text-text-mutedOnBand text-pretty">
-            Un modelo probado en más de 100 países, con ingresos residuales y un sistema de
-            duplicación que te acompaña paso a paso.
+          <p className="mt-4 max-w-[60ch] text-text-muted text-body">
+            Un negocio global con tres pilares claros y un sistema de duplicación probado por más de 20 años.
           </p>
         </div>
 
-        <div className="max-w-[960px] mx-auto mt-10 reveal">
-          <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg">
-            {/* TODO: VIMEO_BUSINESS_ID — lazy-mount 16:9 oportunidad (máx 2 min) */}
-            <div className="ph dark absolute inset-0 rounded-none border-0">
-              Poster del video de oportunidad · SEN
-              <br />
-              (960×540) — Vimeo / Wistia
-            </div>
-            <button
-              type="button"
-              className="absolute inset-0 m-auto w-[76px] h-[76px] rounded-full bg-accent border-0 cursor-pointer flex items-center justify-center transition-transform duration-150 hover:scale-105 hover:bg-accent-press"
-              style={{ boxShadow: '0 10px 30px rgba(27,80,229,0.42)' }}
-              aria-label="Reproducir video de la oportunidad de negocio"
-            >
-              <svg viewBox="0 0 24 24" className="w-[30px] h-[30px] fill-white ml-1">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </button>
-          </div>
-          <p className="mt-3 text-center text-[0.82rem] text-text-mutedOnBand">
-            Video de oportunidad · subtítulos disponibles · sin audio automático
-          </p>
-        </div>
-
-        <div className="mt-10 flex flex-col gap-3 max-w-[840px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 mt-16 md:mt-20">
           {pillars.map((p) => (
-            <Pillar key={p.id} data={p} />
+            <div key={p.number} className="relative reveal">
+              <span
+                className="font-display text-text select-none absolute -top-6 -left-1"
+                style={{ fontSize: '5.5rem', lineHeight: '1', opacity: 0.12, letterSpacing: '-0.04em' }}
+                aria-hidden="true"
+              >
+                {p.number}
+              </span>
+              <h3 className="relative font-sans font-medium text-h3 text-text mt-2">
+                {p.label}
+              </h3>
+              <p className="mt-3 text-text-muted text-body">
+                {p.body}
+              </p>
+            </div>
           ))}
         </div>
 
-        <div className="mt-10 reveal">
-          <a className="btn btn-accent" href="#quiz" data-cta="business">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mt-20 md:mt-28 items-start">
+          <div className="reveal">
+            <div className="relative aspect-video rounded-lg overflow-hidden border border-border bg-bg">
+              {/* TODO: VIMEO_BUSINESS_ID — oportunidad 16:9 (máx 2 min) */}
+              <div className="absolute inset-0 flex items-center justify-center text-text-subtle text-small font-mono">
+                Video · Oportunidad SEN
+              </div>
+            </div>
+            <p className="mt-3 font-mono text-mono text-text-subtle">
+              1:45 · Subtítulos disponibles
+            </p>
+          </div>
+
+          <div className="reveal">
+            <span className="eyebrow">Preguntas frecuentes</span>
+            <div className="mt-5 divide-y divide-border">
+              {faq.map((item, i) => (
+                <details
+                  key={item.q}
+                  className="group py-5"
+                  open={i === 0}
+                >
+                  <summary className="flex justify-between items-center cursor-pointer list-none font-sans font-medium text-text">
+                    <span>{item.q}</span>
+                    <span
+                      className="ml-4 flex-none w-5 h-5 inline-flex items-center justify-center text-text-muted transition-transform duration-200 group-open:rotate-45"
+                      aria-hidden="true"
+                    >
+                      <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                        <path d="M12 5v14M5 12h14" />
+                      </svg>
+                    </span>
+                  </summary>
+                  <p className="mt-3 text-text-muted text-small pr-8">
+                    {item.a}
+                  </p>
+                </details>
+              ))}
+            </div>
+
+            <p className="mt-8 font-mono text-mono text-text-muted">
+              Capacitación · <a href="https://sen.team" className="underline underline-offset-4 hover:text-text">sen.team</a>
+              <span className="mx-2 text-text-subtle">·</span>
+              Mentoría · Dr. Herminio Nevárez
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-16 reveal">
+          <a className="btn btn-primary" href="#quiz" data-cta="business">
             Quiero saber si esto es para mí
           </a>
         </div>

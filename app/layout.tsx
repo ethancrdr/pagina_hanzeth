@@ -1,19 +1,25 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Sora } from 'next/font/google';
+import { Instrument_Serif, Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({
+const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400'],
+  style: ['normal', 'italic'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-instrument-serif',
 });
 
-const sora = Sora({
+const geist = Geist({
   subsets: ['latin'],
-  weight: ['600', '700', '800'],
   display: 'swap',
-  variable: '--font-sora',
+  variable: '--font-geist-sans',
+});
+
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-geist-mono',
 });
 
 export const metadata: Metadata = {
@@ -32,13 +38,16 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
-  themeColor: '#0A0C12',
+  themeColor: '#0B0D10',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${inter.variable} ${sora.variable}`}>
-      <body className={inter.className}>
+    <html
+      lang="es"
+      className={`${instrumentSerif.variable} ${geist.variable} ${geistMono.variable}`}
+    >
+      <body className="font-sans">
         <a className="skip" href="#quiz">Saltar al cuestionario</a>
         {children}
       </body>

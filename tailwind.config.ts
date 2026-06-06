@@ -9,51 +9,53 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: '#0A0C12',
-        band: '#0E1119',
-        surface: '#14161F',
+        bg: '#0B0D10',
+        surface: '#13161B',
+        surfaceHigh: '#181B20',
+        border: 'rgba(255, 255, 255, 0.06)',
+        'border-strong': 'rgba(255, 255, 255, 0.12)',
+
+        text: '#F2F1ED',
+        'text-muted': '#6B6B68',
+        'text-subtle': '#45454A',
+
         accent: {
-          DEFAULT: '#2E63F5',
-          press: '#2454D8',
-          soft: '#7FA0FF',
+          DEFAULT: '#C9A86A',
+          soft: '#7A6543',
         },
-        text: {
-          DEFAULT: '#EDF0F5',
-          onBand: '#F2F4F8',
-          muted: '#8A93A6',
-          mutedOnBand: '#8A93A6',
-        },
-        border: {
-          DEFAULT: 'rgba(255, 255, 255, 0.10)',
-          onBand: 'rgba(255, 255, 255, 0.10)',
+
+        pastel: {
+          red: { bg: '#2A1A1A', text: '#E8B4B0' },
+          blue: { bg: '#14212B', text: '#9CC2D9' },
+          green: { bg: '#18241B', text: '#B0CDB0' },
+          yellow: { bg: '#2A2418', text: '#D9C089' },
         },
       },
       borderRadius: {
-        sm: '10px',
-        md: '14px',
-        lg: '20px',
-        xl: '28px',
+        sm: '4px',
+        md: '6px',
+        lg: '12px',
         pill: '9999px',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
-        display: ['var(--font-sora)', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+        sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-instrument-serif)', 'Georgia', 'serif'],
+        mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],
       },
       fontSize: {
-        h1: ['2.25rem', { lineHeight: '1.12', letterSpacing: '-0.01em', fontWeight: '800' }],
-        h2: ['1.75rem', { lineHeight: '1.12', letterSpacing: '-0.01em', fontWeight: '700' }],
-        h3: ['1.375rem', { lineHeight: '1.25', fontWeight: '600' }],
+        h1: ['3.5rem', { lineHeight: '1.05', letterSpacing: '-0.03em', fontWeight: '400' }],
+        'h1-mobile': ['2.25rem', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '400' }],
+        h2: ['2.25rem', { lineHeight: '1.15', letterSpacing: '-0.02em', fontWeight: '400' }],
+        h3: ['1.5rem', { lineHeight: '1.25', fontWeight: '500' }],
         body: ['1rem', { lineHeight: '1.6' }],
         small: ['0.875rem', { lineHeight: '1.5' }],
+        mono: ['0.75rem', { lineHeight: '1.4', letterSpacing: '0.08em' }],
       },
       maxWidth: {
         wrap: '1120px',
       },
       boxShadow: {
-        sm: '0 1px 2px rgba(11, 14, 22, 0.06), 0 2px 8px rgba(11, 14, 22, 0.06)',
-        md: '0 8px 30px rgba(11, 14, 22, 0.10)',
-        lg: '0 24px 60px rgba(11, 14, 22, 0.16)',
-        accent: '0 6px 20px rgba(27, 80, 229, 0.32)',
+        xs: '0 1px 0 rgba(255, 255, 255, 0.04)',
       },
     },
   },
