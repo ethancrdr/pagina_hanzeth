@@ -36,3 +36,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# tools config
+.agents/
+.claude/
+.cursor/
+.impeccable/
+.opencode/
+
+# office temp files
+~$*
